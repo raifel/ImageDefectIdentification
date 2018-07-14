@@ -37,14 +37,14 @@ namespace ImageProcessing.Controllers
             var motionDetector = new MotionDetector();
             motionDetector.ProcessFrame(df.ReadImageContent(referenceImage, referenceImageContainer));
             var result = new ImageComparisionResult();
-            result.UploadImageAfterProcess(motionDetector.ProcessFrame(df.ReadImageContent(actualImage, actualImageContainer)), actualImageContainer);
+            result.UploadImageAfterProcess(motionDetector.ProcessFrame(df.ReadImageContent(actualImage, actualImageContainer)), actualImageContainer, actualImage);
         }
 
 
         // POST api/values
         [SwaggerOperation("Create")]
         [SwaggerResponse(HttpStatusCode.Created)]
-        public void Post([FromBody]string value)
+        public void Post(string value)
         {
         }
 

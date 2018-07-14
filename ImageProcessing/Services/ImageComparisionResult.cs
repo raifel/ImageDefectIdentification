@@ -53,20 +53,20 @@ namespace ImageProcessing.Services
             return imageFullPath;
         }
 
-        public void UploadImageAfterProcess(Bitmap image, string imageContainer)
+        public void UploadImageAfterProcess(Bitmap image, string imageContainer, string actualImageName)
         {
             string connectionString =
                 CloudConfigurationManager.GetSetting("imageprocessiong3_AzureStorageConnectionString");
             var storageAccount = CloudStorageAccount.Parse(connectionString);
             var client = storageAccount.CreateCloudBlobClient();
-            var container = client.GetContainerReference("imageContainer");
+            var container = client.GetContainerReference(imageContainer);
             container.CreateIfNotExists();
             container.SetPermissions(new BlobContainerPermissions()
             {
                 PublicAccess = BlobContainerPublicAccessType.Blob
             });
 
-            var blockBlob = container.GetBlockBlobReference("Result.jpg");
+            var blockBlob = container.GetBlockBlobReference("Result"+" "+actualImageName);
             using (var memoryStream = new MemoryStream())
             {
                 image.Save(memoryStream, ImageFormat.Jpeg);

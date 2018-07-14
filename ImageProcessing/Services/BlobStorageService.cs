@@ -30,7 +30,7 @@ namespace ImageProcessing.Services
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
             // Retrieve reference to a previously created container.
-            CloudBlobContainer container = blobClient.GetContainerReference("containerReferenceName");
+            CloudBlobContainer container = blobClient.GetContainerReference(containerReferenceName);
 
        
             // Retrieve reference to a blob
